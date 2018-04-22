@@ -10,7 +10,22 @@ import UIKit
 import SceneKit
 import ARKit
 
-class ViewController: UIViewController, ARSCNViewDelegate {
+let BallCategoryName = "ball"
+let PaddleCategoryName = "paddle"
+let BlockCategoryName = "block"
+let GameMessageName = "gameMessage"
+
+let BallCategory   : UInt32 = 0x1 << 0
+let BottomCategory : UInt32 = 0x1 << 1
+let BlockCategory  : UInt32 = 0x1 << 2
+let PaddleCategory : UInt32 = 0x1 << 3
+let BorderCategory : UInt32 = 0x1 << 4
+
+class Wall:SCNPhysicsBody {
+    
+}
+
+class ViewController: UIViewController, ARSCNViewDelegate, SCNPhysicsContactDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
     var trackerNode: SCNNode!
@@ -18,8 +33,17 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var foundSurface = false
     var gamePos = SCNVector3Make(0.0, 0.0, 0.0)
     var mainContainer: SCNNode!
-    var ballNode: SCNNode!
     
+    //var ballNode: SCNNode!
+    
+    override func didMove(toParentViewController parent: UIViewController?) {
+        
+        
+        
+        
+    }
+    
+    //update
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,7 +115,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         if !foundSurface {
             let trackerPlane = SCNPlane(width: 0.3, height: 0.3)
-            trackerPlane.firstMaterial?.diffuse.contents = #imageLiteral(resourceName: "compass2")
+            trackerPlane.firstMaterial?.diffuse.contents = #imageLiteral(resourceName: "targ.png")
             
             
             trackerNode = SCNNode(geometry: trackerPlane)
@@ -116,12 +140,14 @@ class ViewController: UIViewController, ARSCNViewDelegate {
             gameHasStarted = true
             
             mainContainer = sceneView.scene.rootNode.childNode(withName: "mainContainer", recursively: false)!
-            mainContainer.isHidden = true
-            mainContainer.position = gamePos
+            mainContainer.isHidden = false
+            mainContainer.position = SCNVector3Make(gamePos.x, gamePos.y, gamePos.z)
+            print("++++mainContainer x: \(gamePos.x), y:\(gamePos.y), z: \(gamePos.z)")
         }
         
         addBall()
         
+        /*
         let ambientLight = SCNLight()
         ambientLight.type = .ambient
         ambientLight.color = UIColor.white
@@ -139,31 +165,53 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         omniLightNode.light = omniLight
         omniLightNode.position.y = 3.0
         mainContainer.addChildNode(omniLightNode)
+ */
         
     }
     
     func randomPosition() -> SCNVector3 {
-        let randX = (Float(arc4random_uniform(200)) / 100.0) - 1.0
-        let randY = (Float(arc4random_uniform(200)) / 100.0) + 1.5
-        return SCNVector3Make(randX, randY, -3.0)
+        let randX = (Float(arc4random_uniform(50)) / 100.0) - 0.15
+        let randZ = (Float(arc4random_uniform(50)) / 100.0) + 0.8
+        return SCNVector3Make(randX, 0.2, randZ) //y is height
     }
     
     @objc func addBall() {
-        ballNode = sceneView.scene.rootNode.childNode(withName: "pokeball", recursively: false)?.copy() as! SCNNode
-        ballNode.isHidden = false
-        ballNode.position = randomPosition()
+        let mySphere = SCNSphere(radius: 0.065)
+        let mySphereNode = SCNNode(geometry: mySphere)
+        mySphereNode.position = randomPosition()
+        mySphereNode.physicsBody?.restitution = 1.0
         
-        mainContainer.addChildNode(ballNode)
+        //ballNode = sceneView.scene.rootNode.childNode(withName: "ship", recursively: false)?.copy() as! SCNNode
+        mySphereNode.isHidden = false
+        //ballNode.position = randomPosition()
         
-        ballNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
-        ballNode.physicsBody?.isAffectedByGravity = false
-        ballNode.physicsBody?.applyForce(SCNVector3Make(0.0, 0.0, 2.0), asImpulse: true) //speed of the ball
+        mainContainer.addChildNode(mySphereNode)
         
-        let ballDisappearAction = SCNAction.sequence([SCNAction.wait(duration: 5.0), SCNAction.fadeOut(duration: 1.0), SCNAction.removeFromParentNode()]) //wait, fadeOut, then remove the ball
-        ballNode.runAction(ballDisappearAction)
+        mySphereNode.physicsBody = SCNPhysicsBody(type: .dynamic, shape: nil)
+        mySphereNode.physicsBody?.isAffectedByGravity = false
+        mySphereNode.physicsBody?.applyForce(SCNVector3Make(0.0, 0.0, -3.0), asImpulse: true) //speed of the ball
         
-        Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(addBall), userInfo: nil, repeats: false)//Creates a timer and schedules it on the current run loop in the default mode.
+        
+        
+        
+        let ballDisappearAction = SCNAction.sequence([SCNAction.wait(duration: 5.0), SCNAction.fadeOut(duration: 1.0), SCNAction.removeFromParentNode()]) //after 5 seconds of ship moving, fadeOut, then remove the ball
+        mySphereNode.runAction(ballDisappearAction)
+        
+        Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(addBall), userInfo: nil, repeats: false)//Creates a timer and schedules it on the current run loop in the default mode.
         
     }
+    
+//
+//    func cleanScene() {
+//        for node in sceneView.rootNode.childNodes {
+//
+//            if node.presentation.position.y < -2 {
+//                node.removeFromParentNode()
+//            }
+//        }
+//    }//end of cleanScene method
+    
+    
+    
     
 }

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CD05330A208C722100D56D33 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD053309208C722100D56D33 /* GameViewController.swift */; };
+		CD05330C208C7C7200D56D33 /* GameViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD05330B208C7C7200D56D33 /* GameViewController2.swift */; };
+		CD05330E208C83FC00D56D33 /* Trail.scnp in Resources */ = {isa = PBXBuildFile; fileRef = CD05330D208C83FC00D56D33 /* Trail.scnp */; };
+		CD053312208CD15100D56D33 /* targ.png in Resources */ = {isa = PBXBuildFile; fileRef = CD053311208CD15100D56D33 /* targ.png */; };
 		CDF9C70A208BB19900BAB116 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF9C709208BB19900BAB116 /* AppDelegate.swift */; };
 		CDF9C70C208BB19900BAB116 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = CDF9C70B208BB19900BAB116 /* art.scnassets */; };
 		CDF9C70E208BB19900BAB116 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF9C70D208BB19900BAB116 /* ViewController.swift */; };
@@ -16,6 +20,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CD053309208C722100D56D33 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		CD05330B208C7C7200D56D33 /* GameViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController2.swift; sourceTree = "<group>"; };
+		CD05330D208C83FC00D56D33 /* Trail.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Trail.scnp; sourceTree = "<group>"; };
+		CD053311208CD15100D56D33 /* targ.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = targ.png; sourceTree = "<group>"; };
 		CDF9C706208BB19900BAB116 /* HCCCARPong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HCCCARPong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDF9C709208BB19900BAB116 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDF9C70B208BB19900BAB116 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -59,10 +67,14 @@
 				CDF9C709208BB19900BAB116 /* AppDelegate.swift */,
 				CDF9C70B208BB19900BAB116 /* art.scnassets */,
 				CDF9C70D208BB19900BAB116 /* ViewController.swift */,
+				CD05330B208C7C7200D56D33 /* GameViewController2.swift */,
+				CD053309208C722100D56D33 /* GameViewController.swift */,
 				CDF9C70F208BB19900BAB116 /* Main.storyboard */,
+				CD053311208CD15100D56D33 /* targ.png */,
 				CDF9C712208BB19E00BAB116 /* Assets.xcassets */,
 				CDF9C714208BB19E00BAB116 /* LaunchScreen.storyboard */,
 				CDF9C717208BB19E00BAB116 /* Info.plist */,
+				CD05330D208C83FC00D56D33 /* Trail.scnp */,
 			);
 			path = HCCCARPong;
 			sourceTree = "<group>";
@@ -125,10 +137,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD05330E208C83FC00D56D33 /* Trail.scnp in Resources */,
 				CDF9C70C208BB19900BAB116 /* art.scnassets in Resources */,
 				CDF9C716208BB19E00BAB116 /* LaunchScreen.storyboard in Resources */,
 				CDF9C713208BB19E00BAB116 /* Assets.xcassets in Resources */,
 				CDF9C711208BB19900BAB116 /* Main.storyboard in Resources */,
+				CD053312208CD15100D56D33 /* targ.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,7 +154,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDF9C70E208BB19900BAB116 /* ViewController.swift in Sources */,
+				CD05330A208C722100D56D33 /* GameViewController.swift in Sources */,
 				CDF9C70A208BB19900BAB116 /* AppDelegate.swift in Sources */,
+				CD05330C208C7C7200D56D33 /* GameViewController2.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
